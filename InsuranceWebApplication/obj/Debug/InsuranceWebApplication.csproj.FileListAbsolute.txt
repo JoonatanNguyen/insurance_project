@@ -77,6 +77,5 @@ C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\bin\
 C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\obj\Debug\InsuranceWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\obj\Debug\InsuranceWebApplication.dll
 C:\Users\Sven Slijkoord\workspace\insurance-project\InsuranceWebApplication\obj\Debug\InsuranceWebApplication.pdb
