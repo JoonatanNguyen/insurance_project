@@ -13,7 +13,7 @@ namespace InsuranceWebApplication.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201810111120000_CreateInsuranceClaimsTable"; }
+            get { return "201810111120000_CreateAccountTables"; }
         }
         
         string IMigrationMetadata.Source
