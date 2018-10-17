@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using InsuranceWebApplication.Models;
 
 namespace InsuranceWebApplication.Controllers
 {
@@ -28,11 +29,25 @@ namespace InsuranceWebApplication.Controllers
 
         // POST: InsuranceClaim/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(InsuranceClaimViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                using (var db = new ApplicationDbContext())
+                {
+                    db.InsuranceClaims.Add(new InsuranceClaim
+                    {
+                        Name = model.Name,
+                        Gender = model.Gender,
+                        PhoneNumber = model.PhoneNumber,
+                        Email = model.Email,
+                        Address = model.Address,
+                        Description = model.Description
+                    });
+
+                    db.SaveChanges();
+
+                }
 
                 return RedirectToAction("Index");
             }
