@@ -202,6 +202,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810111120000_CreateAccountTables.cs" />
+    <Compile Include="Migrations\201810111120000_CreateAccountTables.Designer.cs">
+      <DependentUpon>201810111120000_CreateAccountTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201810111121566_CreateInsuranceClaimsTable.cs" />
     <Compile Include="Migrations\201810111121566_CreateInsuranceClaimsTable.Designer.cs">
       <DependentUpon>201810111121566_CreateInsuranceClaimsTable.cs</DependentUpon>
@@ -290,6 +294,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810111120000_CreateAccountTables.resx">
+      <DependentUpon>201810111120000_CreateAccountTables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810111121566_CreateInsuranceClaimsTable.resx">
       <DependentUpon>201810111121566_CreateInsuranceClaimsTable.cs</DependentUpon>
     </EmbeddedResource>

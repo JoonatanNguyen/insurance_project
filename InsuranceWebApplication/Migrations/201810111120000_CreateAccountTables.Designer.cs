@@ -7,13 +7,13 @@ namespace InsuranceWebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateAccountTables : IMigrationMetadata
+    public sealed partial class CreateInsuranceClaimsTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateAccountTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateInsuranceClaimsTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810111120000_CreateInsuranceClaimsTable"; }
+            get { return "201810111121566_CreateInsuranceClaimsTable"; }
         }
         
         string IMigrationMetadata.Source
