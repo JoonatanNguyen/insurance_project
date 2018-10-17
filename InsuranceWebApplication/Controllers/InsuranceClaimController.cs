@@ -37,11 +37,6 @@ namespace InsuranceWebApplication.Controllers
                 {
                     db.InsuranceClaims.Add(new InsuranceClaim
                     {
-                        Name = model.Name,
-                        Gender = model.Gender,
-                        PhoneNumber = model.PhoneNumber,
-                        Email = model.Email,
-                        Address = model.Address,
                         Description = model.Description
                     });
 
