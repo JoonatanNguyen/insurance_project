@@ -9,7 +9,7 @@ namespace InsuranceWebApplication.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(InsuranceWebApplication.Models.ApplicationDbContext context)
