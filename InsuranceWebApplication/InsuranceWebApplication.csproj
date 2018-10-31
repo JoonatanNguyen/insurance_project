@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201810111121566_CreateInsuranceClaimsTable.Designer.cs">
       <DependentUpon>201810111121566_CreateInsuranceClaimsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810171101247_AddInsuranceClaimUserRelation.cs" />
+    <Compile Include="Migrations\201810171101247_AddInsuranceClaimUserRelation.Designer.cs">
+      <DependentUpon>201810171101247_AddInsuranceClaimUserRelation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgentViewModel.cs" />
@@ -304,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810111121566_CreateInsuranceClaimsTable.resx">
       <DependentUpon>201810111121566_CreateInsuranceClaimsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171101247_AddInsuranceClaimUserRelation.resx">
+      <DependentUpon>201810171101247_AddInsuranceClaimUserRelation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
