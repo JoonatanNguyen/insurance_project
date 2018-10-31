@@ -1,5 +1,6 @@
 namespace InsuranceWebApplication.Migrations
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -26,6 +27,10 @@ namespace InsuranceWebApplication.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+                 context.Roles.AddOrUpdate(
+                    new IdentityRole { Name = "Customer" }
+                 );
         }
     }
 }
