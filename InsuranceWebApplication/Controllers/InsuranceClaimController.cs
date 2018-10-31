@@ -37,11 +37,13 @@ namespace InsuranceWebApplication.Controllers
                 {
                     db.InsuranceClaims.Add(new InsuranceClaim
                     {
-                        Description = model.Description
+                        Description = model.Description,
+                        User_Id = model.User_Id
                     });
 
                     db.SaveChanges();
 
+                   
                 }
 
                 return RedirectToAction("Index");

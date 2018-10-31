@@ -18,6 +18,7 @@ namespace InsuranceWebApplication.Migrations
                         Email = c.String(),
                         Address = c.String(),
                         Description = c.String(),
+                        User_id = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
