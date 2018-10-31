@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using InsuranceWebApplication.Models;
+using Microsoft.AspNet.Identity;
 
 namespace InsuranceWebApplication.Controllers
 {
@@ -37,16 +38,13 @@ namespace InsuranceWebApplication.Controllers
                 {
                     db.InsuranceClaims.Add(new InsuranceClaim
                     {
-                        Name = model.Name,
-                        Gender = model.Gender,
-                        PhoneNumber = model.PhoneNumber,
-                        Email = model.Email,
-                        Address = model.Address,
-                        Description = model.Description
+                        Description = model.Description,
+                        UserId = User.Identity.GetUserId()
                     });
 
                     db.SaveChanges();
 
+                   
                 }
 
                 return RedirectToAction("Index");
