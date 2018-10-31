@@ -7,9 +7,9 @@ namespace InsuranceWebApplication.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.InsuranceClaims", "User_Id", c => c.String(maxLength: 128));
-            CreateIndex("dbo.InsuranceClaims", "User_Id");
-            AddForeignKey("dbo.InsuranceClaims", "User_Id", "dbo.AspNetUsers", "Id");
+            AddColumn("dbo.InsuranceClaims", "UserId", c => c.String(maxLength: 128));
+            CreateIndex("dbo.InsuranceClaims", "UserId");
+            AddForeignKey("dbo.InsuranceClaims", "UserId", "dbo.AspNetUsers", "Id");
             DropColumn("dbo.InsuranceClaims", "Name");
             DropColumn("dbo.InsuranceClaims", "Gender");
             DropColumn("dbo.InsuranceClaims", "PhoneNumber");
@@ -24,9 +24,9 @@ namespace InsuranceWebApplication.Migrations
             AddColumn("dbo.InsuranceClaims", "PhoneNumber", c => c.String());
             AddColumn("dbo.InsuranceClaims", "Gender", c => c.String());
             AddColumn("dbo.InsuranceClaims", "Name", c => c.String());
-            DropForeignKey("dbo.InsuranceClaims", "User_Id", "dbo.AspNetUsers");
-            DropIndex("dbo.InsuranceClaims", new[] { "User_Id" });
-            DropColumn("dbo.InsuranceClaims", "User_Id");
+            DropForeignKey("dbo.InsuranceClaims", "UserId", "dbo.AspNetUsers");
+            DropIndex("dbo.InsuranceClaims", new[] { "UserId" });
+            DropColumn("dbo.InsuranceClaims", "UserId");
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using InsuranceWebApplication.Models;
+using Microsoft.AspNet.Identity;
 
 namespace InsuranceWebApplication.Controllers
 {
@@ -38,7 +39,7 @@ namespace InsuranceWebApplication.Controllers
                     db.InsuranceClaims.Add(new InsuranceClaim
                     {
                         Description = model.Description,
-                        User_Id = model.User_Id
+                        UserId = User.Identity.GetUserId()
                     });
 
                     db.SaveChanges();
