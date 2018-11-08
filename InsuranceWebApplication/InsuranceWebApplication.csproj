@@ -288,6 +288,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\InsuranceClaim\Create.cshtml" />
     <Content Include="Views\Agent\create.cshtml" />
+    <Content Include="Views\InsuranceClaim\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

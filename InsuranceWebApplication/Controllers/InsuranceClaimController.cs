@@ -21,6 +21,16 @@ namespace InsuranceWebApplication.Controllers
         {
             return View();
         }
+       
+        [Authorize(Roles = "Agent")]
+        public ActionResult List()
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();          
+            var claims = db.InsuranceClaims.SqlQuery("SELECT * FROM InsuranceClaims").ToList();
+            return View(claims);
+         }
+        
 
         // GET: InsuranceClaim/Create
         public ActionResult Create()
