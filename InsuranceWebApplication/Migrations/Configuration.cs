@@ -29,7 +29,9 @@ namespace InsuranceWebApplication.Migrations
             //
 
                  context.Roles.AddOrUpdate(
-                    new IdentityRole { Name = "Customer" }
+                    new IdentityRole { Name = "Customer" },
+                    new IdentityRole { Name = "Agent" },
+                    new IdentityRole { Name = "Manager" }
                  );
         }
     }
