@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InsuranceWebApplication.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,18 @@ namespace InsuranceWebApplication.Controllers
 {
     public class CustomerController : Controller
     {
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Customer
         public ActionResult Index()
         {
@@ -28,22 +42,30 @@ namespace InsuranceWebApplication.Controllers
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CustomerViewModels model)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber };
+                var result = UserManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    var roleresult = UserManager.AddToRole(currentUser.Id, "Customer");
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Customer");
+                }
+
             }
-            catch
-            {
-                return View();
-            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
-        // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+    }
+
+    // GET: Customer/Edit/5
+    public ActionResult Edit(int id)
         {
             return View();
         }
