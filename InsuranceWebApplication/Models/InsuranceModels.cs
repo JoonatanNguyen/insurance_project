@@ -15,6 +15,7 @@ namespace InsuranceWebApplication.Models
         public string Description { get; set; }
 
         public string UserId { get; set; }
+        public bool EvaluateClaim { get; set; }
         public ApplicationUser User { get; set; }
     }
 
