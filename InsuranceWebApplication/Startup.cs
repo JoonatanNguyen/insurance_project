@@ -9,6 +9,7 @@ namespace InsuranceWebApplication
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ConfigureSeeds(app);
         }
     }
 }
