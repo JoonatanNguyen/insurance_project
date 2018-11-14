@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InsuranceWebApplication.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +11,18 @@ namespace InsuranceWebApplication.Controllers
 {
     public class AgentController : Controller
     {
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Agent
         public ActionResult Index()
         {
@@ -28,18 +43,25 @@ namespace InsuranceWebApplication.Controllers
 
         // POST: Agent/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(AgentViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber };
+                var result =  UserManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
 
-                return RedirectToAction("Index");
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    var roleresult = UserManager.AddToRole(currentUser.Id, "Agent");
+      
+                    return RedirectToAction("Index", "Agent");
+                }
+         
             }
-            catch
-            {
-                return View();
-            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         // GET: Agent/Edit/5
