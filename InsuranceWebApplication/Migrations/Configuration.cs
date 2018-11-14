@@ -27,10 +27,6 @@ namespace InsuranceWebApplication.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-                 context.Roles.AddOrUpdate(
-                    new IdentityRole { Name = "Customer" }
-                 );
         }
     }
 }
