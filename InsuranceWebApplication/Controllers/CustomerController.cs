@@ -1,76 +1,73 @@
-﻿using InsuranceWebApplication.Models;
+﻿using System.Web;
+using System.Web.Mvc;
+using InsuranceWebApplication.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace InsuranceWebApplication.Controllers
 {
-    public class AgentController : Controller
+    public class CustomerController : Controller
     {
         private ApplicationUserManager _userManager;
+
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
-        // GET: Agent
+
+        // GET: Customer
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Agent/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Agent/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Agent/Create
+        // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(AgentViewModel model)
+        public ActionResult Create(CustomerViewModels model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber };
-                var result =  UserManager.Create(user, model.Password);
+                // TODO: Add insert logic here
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                };
+                var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {
-
                     var currentUser = UserManager.FindByName(user.UserName);
-                    var roleresult = UserManager.AddToRole(currentUser.Id, "Agent");
-      
-                    return RedirectToAction("Index", "Agent");
-                }
-         
-            }
+                    var roleresult = UserManager.AddToRole(currentUser.Id, "Customer");
 
+                    return RedirectToAction("Index", "Customer");
+                }
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        // GET: Agent/Edit/5
+
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Agent/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -86,13 +83,13 @@ namespace InsuranceWebApplication.Controllers
             }
         }
 
-        // GET: Agent/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Agent/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

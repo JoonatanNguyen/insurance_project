@@ -5,7 +5,7 @@ using System.Web;
 
 namespace InsuranceWebApplication.Models
 {
-    public class AgentViewModel
+    public class CustomerViewModels
     {
         public string Name { get; set; }
         public string Email { get; set; }
