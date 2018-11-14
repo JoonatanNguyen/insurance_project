@@ -21,6 +21,16 @@ namespace InsuranceWebApplication.Controllers
         {
             return View();
         }
+       
+        [Authorize(Roles = "Agent")]
+        public ActionResult List()
+        {
+
+            ApplicationDbContext db = new ApplicationDbContext();          
+            var claims = db.InsuranceClaims.ToList();
+            return View(claims);
+         }
+        
 
         // GET: InsuranceClaim/Create
         public ActionResult Create()
@@ -39,7 +49,8 @@ namespace InsuranceWebApplication.Controllers
                     db.InsuranceClaims.Add(new InsuranceClaim
                     {
                         Description = model.Description,
-                        UserId = User.Identity.GetUserId()
+                        UserId = User.Identity.GetUserId(),
+                        EvaluateClaim = false
                     });
 
                     db.SaveChanges();
@@ -56,26 +67,43 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // GET: InsuranceClaim/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            InsuranceClaim claim = db.InsuranceClaims.Find(id);
+            if (claim == null)
+            {
+                return HttpNotFound();
+            }
+            return View(claim);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, InsuranceClaimViewModel claim)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                
+                
+                var Model = db.InsuranceClaims.Find(id);
+                Model.EvaluateClaim = claim.EvaluateClaim;
+
+                   var Description = claim.Description;
+               
+                   var EvaluateClaim = claim.EvaluateClaim;
+                  
+                db.SaveChanges();
+                return RedirectToAction("List");
+            }
+            return View(claim);
         }
 
         // POST: InsuranceClaim/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         // GET: InsuranceClaim/Delete/5
         public ActionResult Delete(int id)

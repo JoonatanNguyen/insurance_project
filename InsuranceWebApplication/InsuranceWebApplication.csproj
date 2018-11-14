@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201810171101247_AddInsuranceClaimUserRelation.Designer.cs">
       <DependentUpon>201810171101247_AddInsuranceClaimUserRelation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811080957438_approved.cs" />
+    <Compile Include="Migrations\201811080957438_approved.Designer.cs">
+      <DependentUpon>201811080957438_approved.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AgentViewModel.cs" />
@@ -292,6 +296,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\InsuranceClaim\Create.cshtml" />
     <Content Include="Views\Agent\create.cshtml" />
+    <Content Include="Views\InsuranceClaim\List.cshtml" />
+    <Content Include="Views\InsuranceClaim\Edit.cshtml" />
     <Content Include="Views\Customer\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810171101247_AddInsuranceClaimUserRelation.resx">
       <DependentUpon>201810171101247_AddInsuranceClaimUserRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080957438_approved.resx">
+      <DependentUpon>201811080957438_approved.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
