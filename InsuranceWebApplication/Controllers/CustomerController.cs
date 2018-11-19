@@ -1,5 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using InsuranceWebApplication.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -17,9 +19,14 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // GET: Customer
+        [Authorize(Roles = "Agent")]
         public ActionResult Index()
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var customers = db.Users.ToList();
+
+            return View(customers);
+           
         }
 
         // GET: Customer/Details/5
@@ -62,25 +69,39 @@ namespace InsuranceWebApplication.Controllers
 
 
         // GET: Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser customer = db.Users.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);         
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, ApplicationUser user)
         {
-            try
-            {
-                // TODO: Add update logic here
+            if (ModelState.IsValid)
+            { 
+            // TODO: Add update logic here
+            ApplicationDbContext db = new ApplicationDbContext();
 
+
+            var Model = db.Users.Find(id);
+            Model.PhoneNumber = user.PhoneNumber;
+
+            var UserName = user.UserName;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            }
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            
+           
         }
 
         // GET: Customer/Delete/5
