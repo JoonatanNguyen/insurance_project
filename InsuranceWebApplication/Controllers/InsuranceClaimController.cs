@@ -47,6 +47,7 @@ namespace InsuranceWebApplication.Controllers
 
         // POST: InsuranceClaim/Create
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         public ActionResult Create(InsuranceClaimViewModel model)
         {
             try
@@ -62,8 +63,8 @@ namespace InsuranceWebApplication.Controllers
 
                     db.SaveChanges();
                 }
-
-                return RedirectToAction("Index");
+                
+                return RedirectToAction("InsuranceClaims", "Me");
             }
             catch
             {
