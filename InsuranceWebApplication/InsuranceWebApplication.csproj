@@ -302,6 +302,9 @@
     <Content Include="Views\Customer\create.cshtml" />
     <Content Include="Views\Me\InsuranceClaims.cshtml" />
     <Content Include="Views\Me\EditInsuranceClaim.cshtml" />
+    <Content Include="Views\Customer\index.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
