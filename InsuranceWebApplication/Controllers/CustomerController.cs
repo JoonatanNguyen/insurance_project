@@ -10,6 +10,7 @@ namespace InsuranceWebApplication.Controllers
 {
     public class CustomerController : Controller
     {
+       
         private ApplicationUserManager _userManager;
 
         public ApplicationUserManager UserManager
@@ -23,8 +24,9 @@ namespace InsuranceWebApplication.Controllers
         public ActionResult Index()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var customers = db.Users.ToList();
-
+            var Role = db.Roles.First(role => role.Name == "Customer");
+            var customers = db.Users.Where(x => x.Roles.Any(role => Role.Id == role.RoleId)).ToList();
+           
             return View(customers);
            
         }
@@ -53,6 +55,7 @@ namespace InsuranceWebApplication.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber
+                    
                 };
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
@@ -105,25 +108,47 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // GET: Customer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+
+            ApplicationDbContext db = new ApplicationDbContext();
+
+
+            var user = db.Users.Find(id);
+            return View(user);
         }
 
         // POST: Customer/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        [HttpPost]      
+        public ActionResult Delete(string id, string UserId)
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+        {
+            
+            if (ModelState.IsValid)
             {
-                return View();
+                // TODO: Add update logic here
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    
+
+                    var Claims = db.InsuranceClaims.Where(claim => claim.UserId==UserId);
+                    var Model = UserManager.FindById(id);
+                    
+
+                    foreach(var Claim in Claims)
+                    {
+                        db.InsuranceClaims.Remove(Claim);
+                    }
+                    db.SaveChanges();
+                    UserManager.Delete(Model);
+
+
+                    return RedirectToAction("Index");
+                }
             }
+            return RedirectToAction("Index");
+
         }
     }
 }
