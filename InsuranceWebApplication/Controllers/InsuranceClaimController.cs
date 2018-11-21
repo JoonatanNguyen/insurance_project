@@ -5,11 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using InsuranceWebApplication.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace InsuranceWebApplication.Controllers
 {
     public class InsuranceClaimController : Controller
     {
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
+        }
+
         // GET: InsuranceClaim
         public ActionResult Index()
         {
@@ -21,16 +30,14 @@ namespace InsuranceWebApplication.Controllers
         {
             return View();
         }
-       
+
         [Authorize(Roles = "Agent")]
         public ActionResult List()
         {
-
-            ApplicationDbContext db = new ApplicationDbContext();          
+            ApplicationDbContext db = new ApplicationDbContext();
             var claims = db.InsuranceClaims.ToList();
             return View(claims);
-         }
-        
+        }
 
         // GET: InsuranceClaim/Create
         public ActionResult Create()
@@ -40,6 +47,7 @@ namespace InsuranceWebApplication.Controllers
 
         // POST: InsuranceClaim/Create
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         public ActionResult Create(InsuranceClaimViewModel model)
         {
             try
@@ -54,11 +62,9 @@ namespace InsuranceWebApplication.Controllers
                     });
 
                     db.SaveChanges();
-
-                   
                 }
-
-                return RedirectToAction("Index");
+                
+                return RedirectToAction("InsuranceClaims", "Me");
             }
             catch
             {
@@ -69,7 +75,6 @@ namespace InsuranceWebApplication.Controllers
         // GET: InsuranceClaim/Edit/5
         public ActionResult Edit(int? id)
         {
-
             ApplicationDbContext db = new ApplicationDbContext();
 
             InsuranceClaim claim = db.InsuranceClaims.Find(id);
@@ -87,15 +92,15 @@ namespace InsuranceWebApplication.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationDbContext db = new ApplicationDbContext();
-                
-                
+
+
                 var Model = db.InsuranceClaims.Find(id);
                 Model.EvaluateClaim = claim.EvaluateClaim;
 
-                   var Description = claim.Description;
-               
-                   var EvaluateClaim = claim.EvaluateClaim;
-                  
+                var Description = claim.Description;
+
+                var EvaluateClaim = claim.EvaluateClaim;
+
                 db.SaveChanges();
                 return RedirectToAction("List");
             }
@@ -103,7 +108,7 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // POST: InsuranceClaim/Edit/5
-        
+
 
         // GET: InsuranceClaim/Delete/5
         public ActionResult Delete(int id)

@@ -1,0 +1,29 @@
+﻿﻿@model List<InsuranceWebApplication.Models.InsuranceClaim>
+
+@{
+    ViewBag.Title = "Your Insurance Claims";
+}
+
+<h2>Your Insurance Claims</h2>
+
+<table class="table table-striped">
+    <tr>
+        <td>Id</td>
+        <td>Description</td>
+        <td>Approved</td>
+        <td>Action</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td> @Html.DisplayFor(m => item.Id) </td>
+
+            <td> @Html.DisplayFor(m => item.Description) </td>
+
+            <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+
+            <td>@Html.ActionLink("Edit", "EditInsuranceClaim", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+        </tr>
+    }
+</table>

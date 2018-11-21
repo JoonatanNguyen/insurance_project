@@ -203,6 +203,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsuranceClaimController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -299,6 +300,8 @@
     <Content Include="Views\InsuranceClaim\List.cshtml" />
     <Content Include="Views\InsuranceClaim\Edit.cshtml" />
     <Content Include="Views\Customer\create.cshtml" />
+    <Content Include="Views\Me\InsuranceClaims.cshtml" />
+    <Content Include="Views\Me\EditInsuranceClaim.cshtml" />
     <Content Include="Views\Customer\index.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
