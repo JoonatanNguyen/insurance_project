@@ -5,12 +5,14 @@
 
 <h2>View</h2>
 
-<table>
+<table class="table table-striped">
     <tr>
-        <td> Id</td>
-        <td> UserId </td>
+        <td>Id</td>
+        <td>UserId </td>
         <td>Description</td>
         <td>Approved</td>
+        <td>Edit</td>
+        <td>Delete</td>
     </tr>
 
     @foreach (var item in Model)
@@ -24,7 +26,8 @@
 
             <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
 
-            <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id }, new { id = @"Id" })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
         </tr>
     }
 </table>

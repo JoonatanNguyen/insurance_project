@@ -1,0 +1,43 @@
+﻿@model InsuranceWebApplication.Models.InsuranceClaim
+
+@{
+    /**/
+
+    ViewBag.Title = "Delete";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h2>Delete Claim?</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <p>Are you sure you want to delete claim:</p>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", disabled = "true" } })
+            </div>
+            </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="YES" class="btn btn-default" />
+            </div>
+            </div>
+        </div>
+
+   
+
+}
+<div>
+    @Html.ActionLink("Back to List", "List")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
