@@ -15,16 +15,17 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td> @Html.DisplayFor(m => item.Id) </td>
+    <tr>
+        <td> @Html.DisplayFor(m => item.Id) </td>
 
-            <td> @Html.DisplayFor(m => item.UserId) </td>
+        <td> @Html.DisplayFor(m => item.UserId) </td>
 
-            <td> @Html.DisplayFor(m => item.Description) </td>
+        <td> @Html.DisplayFor(m => item.Description) </td>
 
-            <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+        <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
 
-            <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id }, new { id = @"Id" })</td>
-        </tr>
+        <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { id = @"Id" })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id" })</td>
+    </tr>
     }
 </table>

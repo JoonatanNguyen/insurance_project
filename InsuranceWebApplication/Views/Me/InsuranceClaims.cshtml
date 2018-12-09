@@ -12,18 +12,20 @@
         <td>Description</td>
         <td>Approved</td>
         <td>Action</td>
+        <td>Delete</td>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td> @Html.DisplayFor(m => item.Id) </td>
+    <tr>
+        <td> @Html.DisplayFor(m => item.Id) </td>
 
-            <td> @Html.DisplayFor(m => item.Description) </td>
+        <td> @Html.DisplayFor(m => item.Description) </td>
 
-            <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+        <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
 
-            <td>@Html.ActionLink("Edit", "EditInsuranceClaim", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
-        </tr>
+        <td>@Html.ActionLink("Edit", "EditInsuranceClaim", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+        <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+    </tr>
     }
 </table>
