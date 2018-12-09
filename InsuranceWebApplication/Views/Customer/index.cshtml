@@ -5,11 +5,13 @@
 
     <h2>View</h2>
 
-    <table>
+    <table class="table table-striped">
         <tr>
             <td> Id</td>
             <td> Name </td>
             <td>PhoneNumber</td>
+            <td>Action</td>
+            <td>Delete</td>
         </tr>
 
         @foreach (var item in Model)
@@ -22,8 +24,8 @@
             <td> @Html.DisplayFor(m => item.PhoneNumber) </td>
 
 
-            <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { id = @"Id" })</td>
-            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id" })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary"})</td>
+            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
 
 
         </tr>
