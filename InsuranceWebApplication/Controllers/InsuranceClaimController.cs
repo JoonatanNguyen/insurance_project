@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -103,6 +103,7 @@ namespace InsuranceWebApplication.Controllers
 
 
                 var Model = db.InsuranceClaims.Find(id);
+                Model.Description = claim.Description;
                 Model.EvaluateClaim = claim.EvaluateClaim;
                 Model.AgentId = claim.AgentId;
                 db.SaveChanges();
