@@ -34,6 +34,40 @@ namespace InsuranceWebApplication.Controllers
             }
         }
 
+        public ActionResult Delete(int id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+
+            var claim = db.InsuranceClaims.Find(id);
+            return View(claim);
+
+
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, InsuranceClaim claim)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var Claim = db.InsuranceClaims.Find(id);
+                db.InsuranceClaims.Remove(Claim);
+                db.SaveChanges();
+
+                return RedirectToAction("InsuranceClaims");
+            }
+
+        }
+        
+
+
+
+
+
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditInsuranceClaim(int id, InsuranceClaimViewModel claim)
@@ -49,6 +83,7 @@ namespace InsuranceWebApplication.Controllers
                     db.SaveChanges();
                     return RedirectToAction("InsuranceClaims");
                 }
+
             }
             return View(claim);
         }

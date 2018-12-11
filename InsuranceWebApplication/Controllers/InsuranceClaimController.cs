@@ -117,23 +117,34 @@ namespace InsuranceWebApplication.Controllers
         // GET: InsuranceClaim/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+
+            var claim = db.InsuranceClaims.Find(id);
+            return View(claim);
+            
         }
 
         // POST: InsuranceClaim/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, InsuranceClaim claim)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                // TODO: Add update logic here
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
 
-                return RedirectToAction("Index");
+
+                    var Claim = db.InsuranceClaims.Find(id);
+                    db.InsuranceClaims.Remove(Claim);                    
+                    db.SaveChanges();
+
+
+                    return RedirectToAction("List");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }
