@@ -1,14 +1,18 @@
-﻿﻿@model List<InsuranceWebApplication.Models.InsuranceClaim>
+﻿@using Microsoft.AspNet.Identity
+﻿@model List<InsuranceWebApplication.Models.InsuranceClaim>
 @{
     ViewBag.Title = "Claims";
 }
-
+@{ var currentUserId = User.Identity.GetUserId(); }
 <h2>View</h2>
+
+<h3>My Assigned Claims</h3>
 
 <table class="table table-striped">
     <tr>
         <td>Id</td>
-        <td>UserId </td>
+        <td>User</td>
+        <td>Agent</td>
         <td>Description</td>
         <td>Approved</td>
         <td>Edit</td>
@@ -17,17 +21,59 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td> @Html.DisplayFor(m => item.Id) </td>
+        if (item.AgentId == currentUserId)
+        {
+            <tr>
+                <td> @Html.DisplayFor(m => item.Id) </td>
 
-            <td> @Html.DisplayFor(m => item.UserId) </td>
+                <td> @Html.DisplayFor(m => item.User.UserName) </td>
 
-            <td> @Html.DisplayFor(m => item.Description) </td>
+                <td> @Html.DisplayFor(m => item.Agent.UserName) </td>
 
-            <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+                <td> @Html.DisplayFor(m => item.Description) </td>
 
-            <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {id = @"Id", @class = "btn btn-primary"})</td>
-            <td>@Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {id = @"Id", @class = "btn btn-primary"})</td>
-        </tr>
+                <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { id = @"Id", @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    }
+</table>
+
+
+<h3>All Claims</h3>
+
+<table class="table table-striped">
+    <tr>
+        <td> Id</td>
+        <td>User</td>
+        <td>Agent</td>
+        <td>Description</td>
+        <td>Approved</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.AgentId != currentUserId)
+        {
+            <tr>
+                <td> @Html.DisplayFor(m => item.Id) </td>
+
+                <td> @Html.DisplayFor(m => item.User.UserName) </td>
+
+                <td> @Html.DisplayFor(m => item.Agent.UserName) </td>
+
+                <td> @Html.DisplayFor(m => item.Description) </td>
+
+                <td> @Html.DisplayFor(m => item.EvaluateClaim)</td>
+
+
+                <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {id = @"Id", @class = "btn btn-primary"})</td>
+                <td>@Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {id = @"Id", @class = "btn btn-primary"})</td>
+            </tr>
+        }
     }
 </table>

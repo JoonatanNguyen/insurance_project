@@ -20,7 +20,7 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // GET: Customer
-        [Authorize(Roles = "Agent")]
+        [Authorize(Roles = "Agent,Manager")]
         public ActionResult Index()
         {
             ApplicationDbContext db = new ApplicationDbContext();

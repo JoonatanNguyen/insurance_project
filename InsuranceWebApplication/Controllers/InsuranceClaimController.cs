@@ -31,7 +31,7 @@ namespace InsuranceWebApplication.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Agent")]
+        [Authorize(Roles = "Agent,Manager")]
         public ActionResult List()
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -75,14 +75,22 @@ namespace InsuranceWebApplication.Controllers
         // GET: InsuranceClaim/Edit/5
         public ActionResult Edit(int? id)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-
-            InsuranceClaim claim = db.InsuranceClaims.Find(id);
-            if (claim == null)
+            using (var db = new ApplicationDbContext())
             {
-                return HttpNotFound();
+                var claim = db.InsuranceClaims.Find(id);
+                if (claim == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var claimViewModel = new InsuranceClaimViewModel(claim);
+
+                var agentRole = db.Roles.First(role => role.Name.Equals("Agent"));
+                claimViewModel.Agents =
+                    db.Users.Where(user => user.Roles.Any(role => role.RoleId.Equals(agentRole.Id))).ToList();
+
+                return View(claimViewModel);
             }
-            return View(claim);
         }
 
         [HttpPost]
@@ -96,11 +104,7 @@ namespace InsuranceWebApplication.Controllers
 
                 var Model = db.InsuranceClaims.Find(id);
                 Model.EvaluateClaim = claim.EvaluateClaim;
-
-                var Description = claim.Description;
-
-                var EvaluateClaim = claim.EvaluateClaim;
-
+                Model.AgentId = claim.AgentId;
                 db.SaveChanges();
                 return RedirectToAction("List");
             }
