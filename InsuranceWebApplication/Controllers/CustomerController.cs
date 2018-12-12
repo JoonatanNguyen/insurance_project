@@ -49,7 +49,6 @@ namespace InsuranceWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -90,7 +89,6 @@ namespace InsuranceWebApplication.Controllers
         {
             if (ModelState.IsValid)
             { 
-            // TODO: Add update logic here
             ApplicationDbContext db = new ApplicationDbContext();
 
 
@@ -127,7 +125,6 @@ namespace InsuranceWebApplication.Controllers
             
             if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
                     

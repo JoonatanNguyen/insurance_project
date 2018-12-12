@@ -87,7 +87,6 @@ namespace InsuranceWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
                 ApplicationDbContext db = new ApplicationDbContext();
 
 
@@ -118,21 +117,18 @@ namespace InsuranceWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
+                    var insuranceClaims = db.InsuranceClaims.Where(claim => claim.AgentId == id);
+                    var model = UserManager.FindById(id);
 
 
-                    var Agents = db.InsuranceClaims.Where(agent => agent.UserId == UserId);
-                    var Model = UserManager.FindById(id);
-
-
-                    foreach (var Agent in Agents)
+                    foreach (var insuranceClaim in insuranceClaims)
                     {
-                        db.InsuranceClaims.Remove(Agent);
+                        insuranceClaim.AgentId = null;
                     }
                     db.SaveChanges();
-                    UserManager.Delete(Model);
+                    UserManager.Delete(model);
 
 
                     return RedirectToAction("Index");

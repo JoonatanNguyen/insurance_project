@@ -132,7 +132,6 @@ namespace InsuranceWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
 
