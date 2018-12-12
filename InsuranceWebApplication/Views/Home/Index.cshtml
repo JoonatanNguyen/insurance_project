@@ -8,20 +8,23 @@
     <p><a href="@Url.Action("Create", "InsuranceClaim")" class="btn btn-primary btn-lg">Submit your claim &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Insurance Claims</h2>
-        <p>See and manage all insurance claims.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "InsuranceClaim")">Learn more &raquo;</a></p>
+@if (User.IsInRole("Manager"))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Insurance Claims</h2>
+            <p>See and manage all insurance claims.</p>
+            <p><a class="btn btn-default" href="@Url.Action("List", "InsuranceClaim")">View All Insurance Claims &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Customers</h2>
+            <p>See and manage all insurance claims.</p>
+            <p><a class="btn btn-default" href="@Url.Action("Index", "Customer")">View All Customers &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Agents</h2>
+            <p>See and manage all agents.</p>
+            <p><a class="btn btn-default" href="@Url.Action("create", "Agent")">Create Agent &raquo;</a></p>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Customers</h2>
-        <p>See and manage all insurance claims.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Customer")">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Agents</h2>
-        <p>See and manage all agents.</p>
-        <p><a class="btn btn-default" href="@Url.Action("Index", "Agent")">Learn more &raquo;</a></p>
-    </div>
-</div>
+}
