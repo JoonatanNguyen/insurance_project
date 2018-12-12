@@ -18,6 +18,7 @@ namespace InsuranceWebApplication.Models
             UserId = claim.UserId;
             EvaluateClaim = claim.EvaluateClaim;
             AgentId = claim.AgentId;
+            User = claim.User;
         }
         
         public int Id { get; set; }
@@ -25,6 +26,8 @@ namespace InsuranceWebApplication.Models
         public string UserId { get; set; }
         public bool EvaluateClaim { get; set; }
         public string AgentId { get; set; }
+
+        public ApplicationUser User { get; set; }
 
         public List<ApplicationUser> Agents { get; set; }
 
