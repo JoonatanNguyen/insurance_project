@@ -26,7 +26,11 @@ namespace InsuranceWebApplication.Controllers
         // GET: Agent
         public ActionResult Index()
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+            var Role = db.Roles.First(role => role.Name == "Agent");
+            var customers = db.Users.Where(x => x.Roles.Any(role => Role.Id == role.RoleId)).ToList();
+
+            return View(customers);
         }
 
         // GET: Agent/Details/5
@@ -65,47 +69,76 @@ namespace InsuranceWebApplication.Controllers
         }
 
         // GET: Agent/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            ApplicationUser agent = db.Users.Find(id);
+            if (agent == null)
+            {
+                return HttpNotFound();
+            }
+            return View(agent);
         }
 
         // POST: Agent/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, ApplicationUser agent)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add update logic here
+                ApplicationDbContext db = new ApplicationDbContext();
 
+
+                var Model = db.Users.Find(id);
+                Model.PhoneNumber = agent.PhoneNumber;
+
+                var UserName = agent.UserName;
+
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         // GET: Agent/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            ApplicationDbContext db = new ApplicationDbContext();
+
+
+            var user = db.Users.Find(id);
+            return View(user);
         }
 
         // POST: Agent/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, string UserId)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add delete logic here
+                // TODO: Add update logic here
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
 
-                return RedirectToAction("Index");
+
+                    var Agents = db.InsuranceClaims.Where(agent => agent.UserId == UserId);
+                    var Model = UserManager.FindById(id);
+
+
+                    foreach (var Agent in Agents)
+                    {
+                        db.InsuranceClaims.Remove(Agent);
+                    }
+                    db.SaveChanges();
+                    UserManager.Delete(Model);
+
+
+                    return RedirectToAction("Index");
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

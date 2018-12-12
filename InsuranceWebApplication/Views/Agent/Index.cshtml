@@ -1,20 +1,20 @@
 ﻿@model List<InsuranceWebApplication.Models.ApplicationUser>
-    @{
-        ViewBag.Title = "Index";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
-    <h2>View</h2>
+<h2>View</h2>
 
-    <table class="table table-striped">
-        <tr>
-            <td> Name </td>
-            <td>PhoneNumber</td>
-            <td>Action</td>
-            <td>Delete</td>
-        </tr>
+<table class="table table-striped">
+    <tr>
+        <td> Name </td>
+        <td>PhoneNumber</td>
+        <td>Action</td>
+        <td>Delete</td>
+    </tr>
 
-        @foreach (var item in Model)
-        {
+    @foreach (var item in Model)
+    {
         <tr>
             <td> @Html.DisplayFor(m => item.UserName) </td>
 
@@ -26,5 +26,5 @@
 
 
         </tr>
-        }
-    </table>
+    }
+</table>

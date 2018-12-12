@@ -311,6 +311,9 @@
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\InsuranceClaim\Delete.cshtml" />
     <Content Include="Views\Me\Delete.cshtml" />
+    <Content Include="Views\Agent\Index.cshtml" />
+    <Content Include="Views\Agent\Edit.cshtml" />
+    <Content Include="Views\Agent\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
